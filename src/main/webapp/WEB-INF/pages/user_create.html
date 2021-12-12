@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
 </head>
 <body>
 <!--/*@thymesVar id="user" type="web"*/-->
-<form action="#" th:action="@{/user_create}" th:object="${user}" method="post">
-    <label for="name"> Name</label>
-    <input type="text", th:field="*{name}" id="name" placeholder="Name">
-    <label for="surname"> Surname</label>
-    <input type="text", th:field="*{surname}" id="surname" placeholder="Surname">
-    <label for="age"> Age</label>
-    <input type="number", th:field="*{age}" id="age" placeholder="Age">
+<form th:method="post" th:action="@{/admin/new}" th:object="${user}" >
+    <label for="username"> Username</label>
+    <input type="text", th:field="*{username}" id="username" placeholder="username">
+    <label for="password"> Password</label>
+    <input type="text", th:field="*{password}" id="password" placeholder="password">
+    <label>
+        <input type="checkbox" name="roleAdmin" th:value="ADMIN" th:text="ADMIN">
+    </label>
+    <label>
+        <input type="checkbox" name="roleUser" th:value="USER" th:text="USER">
+    </label>
     <input type="submit" value="Create User">
 </form>
 </body>
