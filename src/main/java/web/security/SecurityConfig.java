@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.service.UserDetailsServiceImpl;
 
 @Configuration
@@ -37,7 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll()
                 .successHandler(successUserHandler)
                 .and()
-                .logout().permitAll()
+                .logout()
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
                 ;
     }
 

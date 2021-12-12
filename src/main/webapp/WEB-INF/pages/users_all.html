@@ -20,7 +20,7 @@
             <td th:text="${user.username}"></td>
             <td th:text="${user.password}"></td>
             <td th:text="${user.roles}"></td>
-            <td><a th:href="@{user_update/{id}(id=${user.id})}">Edit</a></td>
+            <td><a th:href="@{/admin/edit/{id}(id=${user.id})}">Edit</a></td>
             <td>
                 <form th:method="delete" th:action="@{user_delete/{id}(id=${user.id})}">
                     <input type="submit" value="Delete">
@@ -33,4 +33,7 @@
     <p><a href="/admin/new">Create User</a></p>
 </div>
 </body>
+<form th:method="GET" action="/logout">
+    <input type="submit" value="Exit">
+</form>
 </html>
