@@ -50,6 +50,7 @@ public class DatabaseConfig {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.enable_lazy_load_no_trans", environment.getProperty("hibernate.enable_lazy_load_no_trans"));
 
         entityManager.setJpaProperties(properties);
 
@@ -60,7 +61,6 @@ public class DatabaseConfig {
     public PlatformTransactionManager getPlatformTransactionManager(){
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(getContainerEntityManagerFactoryBean().getObject());
-
         return jpaTransactionManager;
     }
 

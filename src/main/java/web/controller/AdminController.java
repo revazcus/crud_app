@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.models.Role;
 import web.models.User;
+import web.service.RoleService;
 import web.service.UserService;
 
 import java.util.HashSet;
@@ -18,10 +19,12 @@ import java.util.Set;
 public class AdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/")
@@ -42,8 +45,8 @@ public class AdminController {
                              @RequestParam(required = false) String roleAdmin,
                              @RequestParam(required = false) String roleUser){
         Set<Role> roleSet = new HashSet<>();
-        Role admins = new Role(1,"ADMIN");
-        Role users = new Role(2, "USER");
+        Role admins = roleService.getRoleByRoleName("ADMIN");
+        Role users = roleService.getRoleByRoleName("USER");
         if (admins.toString().equals(roleAdmin)){
             roleSet.add(admins);
         } if (users.toString().equals(roleUser)){
@@ -87,8 +90,8 @@ public class AdminController {
                              @RequestParam(required = false) String roleAdmin,
                              @RequestParam(required = false) String roleUser) {
         Set<Role> roleSet = new HashSet<>();
-        Role admins = new Role(1,"ADMIN");
-        Role users = new Role(2, "USER");
+        Role admins = roleService.getRoleByRoleName("ADMIN");
+        Role users = roleService.getRoleByRoleName("USER");
         if (admins.toString().equals(roleAdmin)){
             roleSet.add(admins);
         } if (users.toString().equals(roleUser)){
